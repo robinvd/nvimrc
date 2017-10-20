@@ -52,7 +52,7 @@ call plug#end()
 "general vim settings
 let mapleader = "\<space>"
 set timeoutlen=1000 ttimeoutlen=0
-set hidden
+set hidden " also needed for languageclient
 set expandtab
 set shiftwidth=2
 set autoindent
@@ -95,6 +95,7 @@ highlight SyntasticStlyeErrorSign guibg=#eee8d5 guifg=red
 "other plugins
 let g:airline_powerline_fonts = 1
 let g:gitgutter_map_keys = 0
+let g:LanguageClient_autoStart = 1;
 "let g:deoplete#enable_at_startup=1
 "set completeopt+=noinsert
 
