@@ -17,7 +17,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 " Plug 'Shougo/denite.nvim'
 
-" autocomplete
+" coding
 Plug 'roxma/nvim-completion-manager'
 Plug 'autozimu/LanguageClient-neovim', {'do': 'UpdateRemotePlugins'}
 Plug 'Shougo/echodoc.vim'
@@ -95,32 +95,44 @@ highlight SyntasticStlyeErrorSign guibg=#eee8d5 guifg=red
 "other plugins
 let g:airline_powerline_fonts = 1
 let g:gitgutter_map_keys = 0
-let g:LanguageClient_autoStart = 1;
+let g:LanguageClient_autoStart = 1
 "let g:deoplete#enable_at_startup=1
 "set completeopt+=noinsert
+let g:LanguageClient_serverCommands = {
+  \ 'java' : ['nix-shell', '-p', 'openjdk', 'bash', '--run', 'bash ~/prog/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/wrapper.sh'],
+  \ 'haskell' : ['hie', '--lsp', '-d', '-l', '~/hie.log']
+  \ }
 
 "general keybindings
+"move splits from normal and terminal mode
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+tnoremap <C-J> <C-\><C-n><C-W><C-J>
+tnoremap <C-K> <C-\><C-n><C-W><C-K>
+tnoremap <C-L> <C-\><C-n><C-W><C-L>
+tnoremap <C-H> <C-\><C-n><C-W><C-H>
+
+" tnoremap <C-Space> <C-\><C-n><Space>
+"move cursor in insert
 inoremap <C-J> <C-O>j
 inoremap <C-K> <C-O>k
 inoremap <C-L> <C-O>l
 inoremap <C-H> <C-O>h
 
 " <leader> keybindings + vim leader guide
-" TODO surround, languageClient, fzf, vimplug, git?, gitv?
+" TODO surround, languageClient, fzf, vimplug, git?, gitv?, terms
 let g:lmap =  {}
-nmap <leader><tab> <C-6>
+nmap <leader><tab> <C-^>
 let g:lmap.b = { 'name' : 'Buffer Menu'}
-  let g:lmap.b.b = [ 'Denite buffer', 'search buffers']
+  let g:lmap.b.b = [ 'Buffers', 'search buffers']
 let g:lmap.f = { 'name' : 'File Menu' }
   let g:lmap.f.a = ['wa', 'save all buffers']
   let g:lmap.f.e = { 'name' : 'Edit files' }
     let g:lmap.f.e.d = ['e $MYVIMRC', 'Open vimrc']
     let g:lmap.f.e.R = ['e $MYVIMRC', 'Reload vimrc']
-  let g:lmap.f.f = ['Denite file_rec', 'search in current dir']
+  let g:lmap.f.f = ['Files', 'search in current dir']
   let g:lmap.f.s = ['w', 'save current buffer']
   let g:lmap.f.T = ['NERDTreeTabsToggle', 'Toggle global NERDTree']
   let g:lmap.f.t = ['NERDTreeFocus', 'Focus the NERDTree']
@@ -133,6 +145,15 @@ let g:lmap.g = { 'name' : 'Git' }
     let g:lmap.g.h.s = ['stage hunk', 'GitGutterStageHunk']
     let g:lmap.g.h.u = ['stage hunk', 'GitGutterUndoHunk']
     let g:lmap.g.h.v = ['stage hunk', 'GitGutterPreviewHunk']
+let g:lmap.l = { 'name' : 'lcp',
+  \ 'd' : [':call LanguageClient_textDocument_definition()', 'definition'],
+  \ 'a' : [':call LanguageClient_textDocument_codeAction()', 'fix action'],
+  \ 'f' : [':call LanguageClient_textDocument_formatting()', 'format document'],
+  \ 'i' : [':call LanguageClient_textDocument_hover()', 'info'],
+  \ 'r' : [':call LanguageClient_textDocument_rename()', 'rename'],
+  \ 's' : [':call LanguageClient_textDocument_documentSymbol()', 'top level symbols'],
+  \ 'u' : [':call LanguageClient_textDocument_references()', 'references under cursor'],
+  \ }
 let g:lmap.t = { 'name' : 'Toggles'}
   let g:lmap.t.n = ['set number!', 'Toggle line numbers']
   let g:lmap.t.r = ['set relativenumber!', 'Toggle relative numbers']
@@ -148,6 +169,5 @@ let g:lmap.x = { 'name' : 'Text'}
 
 call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
 nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
+tnoremap <silent> <c-space> <c-\><c-n>:<c-u>LeaderGuide '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
-
-
