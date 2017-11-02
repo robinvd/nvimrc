@@ -125,26 +125,44 @@ inoremap <C-H> <C-O>h
 " TODO surround, languageClient, fzf, vimplug, git?, gitv?, terms
 let g:lmap =  {}
 nmap <leader><tab> <C-^>
-let g:lmap.b = { 'name' : 'Buffer Menu'}
-  let g:lmap.b.b = [ 'Buffers', 'search buffers']
-let g:lmap.f = { 'name' : 'File Menu' }
-  let g:lmap.f.a = ['wa', 'save all buffers']
-  let g:lmap.f.e = { 'name' : 'Edit files' }
-    let g:lmap.f.e.d = ['e $MYVIMRC', 'Open vimrc']
-    let g:lmap.f.e.R = ['e $MYVIMRC', 'Reload vimrc']
-  let g:lmap.f.f = ['Files', 'search in current dir']
-  let g:lmap.f.s = ['w', 'save current buffer']
-  let g:lmap.f.T = ['NERDTreeTabsToggle', 'Toggle global NERDTree']
-  let g:lmap.f.t = ['NERDTreeFocus', 'Focus the NERDTree']
-  let g:lmap.f.w = ['w', 'write current buffer']
-  let g:lmap.f.W = ['w!', 'write current buffer!']
-let g:lmap.g = { 'name' : 'Git' }
-  let g:lmap.g.h = { 'name' : 'Hunk' }
-    let g:lmap.g.h.n = ['next hunk', 'GitGutterNextHunk']
-    let g:lmap.g.h.p = ['prev hunk', 'GitGutterPrevHunk']
-    let g:lmap.g.h.s = ['stage hunk', 'GitGutterStageHunk']
-    let g:lmap.g.h.u = ['stage hunk', 'GitGutterUndoHunk']
-    let g:lmap.g.h.v = ['stage hunk', 'GitGutterPreviewHunk']
+let g:lmap.b = { 'name' : 'Buffer Menu',
+  \ 'b' : [ 'Buffers', 'search buffers'],
+  \ 'l' : [ 'BLines', 'search lines in current buffer'],
+  \ 'L' : [ 'Lines', 'search lines in all buffer'],
+  \}
+let g:lmap.f = { 'name' : 'File Menu',
+  \ 'a' : ['wa', 'save all buffers'],
+  \ 'e' : { 'name' : 'Edit files',
+    \ 'd' : ['e $MYVIMRC', 'Open vimrc'],
+    \ 'R' : ['e $MYVIMRC', 'Reload vimrc'],
+    \ },
+  \ 'f' : ['Files', 'search in current dir'],
+  \ 's' : ['w', 'save current buffer'],
+  \ 'T' : ['NERDTreeTabsToggle', 'Toggle global NERDTree'],
+  \ 't' : ['NERDTreeFocus', 'Focus the NERDTree'],
+  \ 'w' : ['w', 'write current buffer'],
+  \ 'W' : ['w!', 'write current buffer!'],
+  \}
+let g:lmap.g = { 'name' : 'Git',
+  \ 'c' : ['Gcommit', 'git commit'],
+  \ 'd' : ['Gdiff', 'git diff'],
+  \ 'f' : [ 'GFiles', 'find files in git'],
+  \ 'h' : { 'name' : 'Hunk',
+    \ 'n' : ['GitGutterNextHunk', 'next hunk'],
+    \ 'p' : ['GitGutterPrevHunk', 'prev hunk'],
+    \ 's' : ['GitGutterStageHunk', 'stage hunk'],
+    \ 'u' : ['GitGutterUndoHunk', 'undo hunk'],
+    \ 'v' : ['GitGutterPreviewHunk', 'preview hunk'],
+    \},
+  \ 'r' : { 'name' : 'Remote',
+    \ 'f' : ['Gfetch' , 'fetch remote'],
+    \ 'p' : ['Gpull' , 'pull remote'],
+    \ 'u' : ['Gpush' , 'push remote'],
+    \ 'm' : ['Gmerge' , 'merge remote'],
+    \},
+  \ 's' : ['Gstatus', 'git status'],
+  \ 'w' : ['Gwrite', 'stage file'],
+  \}
 let g:lmap.l = { 'name' : 'lcp',
   \ 'd' : [':call LanguageClient_textDocument_definition()', 'definition'],
   \ 'a' : [':call LanguageClient_textDocument_codeAction()', 'fix action'],
