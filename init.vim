@@ -21,18 +21,20 @@ Plug 'junegunn/fzf.vim'
 Plug 'roxma/nvim-completion-manager'
 Plug 'autozimu/LanguageClient-neovim', {'do': 'UpdateRemotePlugins'}
 Plug 'Shougo/echodoc.vim'
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 " Plug 'Shougo/deoplete.nvim' not needed with languageclient
 " Plug 'Ale'
 
 " usability
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
-Plug 'Raimondi/delimitMate' " insert mode helper?
+" Plug 'Raimondi/delimitMate' " insert mode helper?
 Plug 'sheerun/vim-polyglot' " language pack
 
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'jistr/vim-nerdtree-tabs'
 Plug 'hecal3/vim-leader-guide'
 
 " general ones
@@ -77,8 +79,10 @@ let NERDTreeAutoCenterThreshold = 3
 let NERDTreeMinimalUI = 1
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeCascadeSingleChildDir = 1
+let NERDTreeQuitOnOpen=1
 let NERDTreeCascadeOpenSingleChildDir = 1
 let NERDTreeShowBookmarks = 1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:nerdtree_tabs_smart_startup_focus = 2
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:nerdtree_tabs_open_on_gui_startup = 1
@@ -138,7 +142,7 @@ let g:lmap.f = { 'name' : 'File Menu',
     \ },
   \ 'f' : ['Files', 'search in current dir'],
   \ 's' : ['w', 'save current buffer'],
-  \ 'T' : ['NERDTreeTabsToggle', 'Toggle global NERDTree'],
+  \ 'T' : ['NERDTreeToggle', 'Toggle global NERDTree'],
   \ 't' : ['NERDTreeFocus', 'Focus the NERDTree'],
   \ 'w' : ['w', 'write current buffer'],
   \ 'W' : ['w!', 'write current buffer!'],
