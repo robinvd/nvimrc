@@ -1,4 +1,4 @@
-"(TODO)
+
 "something to comment things
 "some git framework
 "the 'b' prefix
@@ -15,26 +15,21 @@ endfunction
 call plug#begin()
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-" Plug 'Shougo/denite.nvim'
 
 " coding
 Plug 'roxma/nvim-completion-manager'
-Plug 'autozimu/LanguageClient-neovim', {'do': 'UpdateRemotePlugins'}
+" Plug 'autozimu/LanguageClient-neovim', {'do': 'UpdateRemotePlugins'}
 Plug 'Shougo/echodoc.vim'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
-" Plug 'Shougo/deoplete.nvim' not needed with languageclient
-" Plug 'Ale'
 
 " usability
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
-" Plug 'Raimondi/delimitMate' " insert mode helper?
-Plug 'sheerun/vim-polyglot' " language pack
+" Plug 'sheerun/vim-polyglot' " language pack
 
 Plug 'scrooloose/nerdtree'
-" Plug 'jistr/vim-nerdtree-tabs'
 Plug 'hecal3/vim-leader-guide'
 
 " general ones
@@ -47,9 +42,23 @@ Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-" call dein#add('majutsushi/tagbar')
-" call dein#add('Shougo/deol.nvim')
+
+Plug 'easymotion/vim-easymotion'
+
+" haskell
+" Plug 'itchyny/vim-haskell-indent'
+Plug 'alx741/vim-stylishask'
+Plug 'neovimhaskell/haskell-vim'
+" rust
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
+
+let g:stylishask_on_save = 1
+
+" nnoremap <C-h> 
+
+set autoread
 
 "general vim settings
 let mapleader = "\<space>"
@@ -107,23 +116,13 @@ let g:LanguageClient_serverCommands = {
   \ 'haskell' : ['hie', '--lsp', '-d', '-l', '~/hie.log']
   \ }
 
-"general keybindings
-"move splits from normal and terminal mode
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-tnoremap <C-J> <C-\><C-n><C-W><C-J>
-tnoremap <C-K> <C-\><C-n><C-W><C-K>
-tnoremap <C-L> <C-\><C-n><C-W><C-L>
-tnoremap <C-H> <C-\><C-n><C-W><C-H>
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+map <C-s> <Plug>(easymotion-prefix)
 
-" tnoremap <C-Space> <C-\><C-n><Space>
-"move cursor in insert
-inoremap <C-J> <C-O>j
-inoremap <C-K> <C-O>k
-inoremap <C-L> <C-O>l
-inoremap <C-H> <C-O>h
+nmap s <Plug>(easymotion-overwin-f2)
+nmap S <Plug>(easymotion-overwin-f2)
+nmap ; :
+" imap <C-s> <C-o>s
 
 " <leader> keybindings + vim leader guide
 " TODO surround, languageClient, fzf, vimplug, git?, gitv?, terms
